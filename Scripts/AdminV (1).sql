@@ -1,4 +1,6 @@
-CREATE DATABASE [Vendors] -- adatbázis létrehozás
+--  .Scripts\AdminV (1).sql
+-- adatbázis létrehozás
+CREATE DATABASE [Vendors]
  CONTAINMENT = NONE
  ON  PRIMARY 
 ( NAME = N'Vendors', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\Vendors.mdf' , SIZE = 153600KB , FILEGROWTH = 12%), 
@@ -86,41 +88,3 @@ IF NOT EXISTS (SELECT name FROM sys.filegroups WHERE is_default=1 AND name = N'P
 GO
 
 
-
--- ---------------------------------------------------------------------------------
-
-USE [master]
-GO
-CREATE LOGIN [VendorAdmin] WITH PASSWORD=N'Pa55w.rd', DEFAULT_DATABASE=[Vendors], CHECK_EXPIRATION=ON, CHECK_POLICY=ON
-GO
-use [Vendors];
-GO
-use [master];
-GO
-USE [Vendors]
-GO
-CREATE USER [VendorAdmin] FOR LOGIN [VendorAdmin]
-GO
-USE [Vendors]
-GO
-ALTER ROLE [db_owner] ADD MEMBER [VendorAdmin]
-GO
-
--- --------------------------------------------------------------------------------
-
-USE [master]
-GO
-CREATE LOGIN [VendorRO] WITH PASSWORD=N'Pa55w.rd', DEFAULT_DATABASE=[Vendors], CHECK_EXPIRATION=ON, CHECK_POLICY=ON
-GO
-USE [Vendors]
-GO
-CREATE USER [VendorRO] FOR LOGIN [VendorRO]
-GO
-USE [Vendors]
-GO
-ALTER ROLE [db_datareader] ADD MEMBER [VendorRO]
-GO
-
--- --------------------------------------------------------------------------------
-
---  3., feledat esetén azt gondolom, hogy ha a VendorAdmin user "db_owner" akkor mennie kell az openrowset utasításnak
