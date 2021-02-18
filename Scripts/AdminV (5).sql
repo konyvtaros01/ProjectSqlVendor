@@ -1016,3 +1016,7 @@ SELECT PurchaseOrderID, PurchaseOrderDetailID, DueDate, OrderQty, ProductID, Uni
 	ReceivedQty, RejectedQty, ModifiedDate
 FROM AdventureWorks2019.Purchasing.PurchaseOrderDetail
 SET IDENTITY_INSERT dbo.PurchaseOrderDetail OFF
+
+-- 
+INSERT dbo.PersonPhone (BusinessEntityID, PhoneNumber, PhoneNumberTypeID, ModifiedDate)
+SELECT * FROM AdventureWorks2019.Person.PersonPhone

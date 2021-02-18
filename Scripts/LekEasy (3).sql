@@ -1,5 +1,6 @@
 -- Lekérdezés 3. (easy)
 SELECT Name, ProductNumber, ListPrice
 FROM Product
-where SellEndDate is NULL and ListPrice = 0
+WHERE ProductID NOT IN (
+SELECT DISTINCT ProductID FROM ProductVendor) AND SellEndDate IS NULL
 ORDER BY Name
